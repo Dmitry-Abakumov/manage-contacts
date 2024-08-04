@@ -1,22 +1,40 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
+const { REACT_APP_BASE_URL } = process.env;
+
 export const contactApi = createApi({
   reducerPath: "contactApi",
   baseQuery: fetchBaseQuery({
-    baseUrl:
-      "https://cors-anywhere.herokuapp.com/https://live.devnimble.com/api/v1",
+    baseUrl: REACT_APP_BASE_URL,
     prepareHeaders: (headers) => {
-      const token = process.env.REACT_APP_AUTHORIZATION_TOKEN;
+      const { REACT_APP_AUTHORIZATION_TOKEN } = process.env;
 
-      headers.set("Authorization", `Bearer ${token}`);
+      headers.set("Authorization", `Bearer ${REACT_APP_AUTHORIZATION_TOKEN}`);
     },
   }),
 
   endpoints: (builder) => ({
     getAllContacts: builder.query({
-      query: () => "/contacts",
+      query: () => "/contacts?sort=created:desc",
+      providesTags: ["Contacts"],
+    }),
+    getOneContact: builder.query({
+      query: (id) => `/contact/${id}`,
+      providesTags: ["OneContact"],
+    }),
+    addContact: builder.mutation({
+      query: (newContact) => ({
+        url: "/contact",
+        method: "POST",
+        body: newContact,
+      }),
+      invalidatesTags: ["Contacts"],
     }),
   }),
 });
 
-export const { useGetAllContactsQuery } = contactApi;
+export const {
+  useGetAllContactsQuery,
+  useGetOneContactQuery,
+  useAddContactMutation,
+} = contactApi;

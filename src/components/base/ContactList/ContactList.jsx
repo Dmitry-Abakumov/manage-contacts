@@ -2,18 +2,18 @@ import { TailSpin } from "react-loader-spinner";
 
 import { useGetAllContactsQuery } from "@/services";
 
-import { Contact } from "@/components/ui/Contact/Contact";
+import { ContactListItem } from "@/components/ui";
 
 export const ContactList = () => {
-  const { data, error, isLoading, isError } = useGetAllContactsQuery();
+  const { data, isLoading, isError } = useGetAllContactsQuery();
 
   return (
-    <ul>
+    <ul className="flex flex-col gap-[14px]">
       {data &&
         !isLoading &&
         !isError &&
         data.resources.map((contact) => (
-          <Contact key={contact.id} {...contact} />
+          <ContactListItem key={contact.id} {...contact} />
         ))}
 
       {isLoading && (

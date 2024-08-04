@@ -2,7 +2,7 @@ import { Suspense, lazy } from "react";
 import { Route, Routes, Navigate } from "react-router-dom";
 import { TailSpin } from "react-loader-spinner";
 
-const ContactPage = lazy(() => import("@/pages/ContactListPage"));
+const ContactsPage = lazy(() => import("@/pages/ContactsPage"));
 const SingleContactPage = lazy(() => import("@/pages/SingleContactPage"));
 
 export const UserRoutes = () => {
@@ -18,7 +18,7 @@ export const UserRoutes = () => {
       }
     >
       <Routes>
-        <Route path="/contacts" element={<ContactPage />} />
+        <Route path="/contacts" element={<ContactsPage />} />
         <Route path="/contacts/:id" element={<SingleContactPage />} />
         <Route path="*" element={<Navigate to="/contacts" replace />} />
       </Routes>
