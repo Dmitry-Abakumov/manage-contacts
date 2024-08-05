@@ -1,11 +1,10 @@
-import { CreateContact } from "@/sections/CreateContact";
-import { Contacts } from "@/sections/Contacts";
+import { CreateContactSection, ContactsSection } from "@/sections";
 
 const ContactsPage = () => {
   return (
     <>
-      <CreateContact />
-      <Contacts />
+      <CreateContactSection />
+      <ContactsSection />
     </>
   );
 };

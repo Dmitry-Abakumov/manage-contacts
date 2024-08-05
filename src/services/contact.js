@@ -18,17 +18,36 @@ export const contactApi = createApi({
       query: () => "/contacts?sort=created:desc",
       providesTags: ["Contacts"],
     }),
+
     getOneContact: builder.query({
       query: (id) => `/contact/${id}`,
       providesTags: ["OneContact"],
     }),
+
     addContact: builder.mutation({
-      query: (newContact) => ({
+      query: (body) => ({
         url: "/contact",
         method: "POST",
-        body: newContact,
+        body,
       }),
       invalidatesTags: ["Contacts"],
+    }),
+
+    deleteContact: builder.mutation({
+      query: (id) => ({
+        url: `/contact/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["Contacts"],
+    }),
+
+    addTag: builder.mutation({
+      query: ({ id, body }) => ({
+        url: `/contacts/${id}/tags`,
+        method: "PUT",
+        body,
+      }),
+      invalidatesTags: ["OneContact"],
     }),
   }),
 });
@@ -37,4 +56,6 @@ export const {
   useGetAllContactsQuery,
   useGetOneContactQuery,
   useAddContactMutation,
+  useDeleteContactMutation,
+  useAddTagMutation,
 } = contactApi;

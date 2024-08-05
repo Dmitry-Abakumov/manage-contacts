@@ -1,14 +1,10 @@
-import { useParams } from "react-router-dom";
-
-import { AddTag } from "@/sections/AddTag";
-
-import { useGetOneContactQuery } from "@/services";
+import { AddTagSection, SingleContactSection } from "@/sections";
 
 const SingleContactPage = () => {
-  const [data, isError, isLoading] = useGetOneContactQuery();
   return (
     <>
-      <AddTag />
+      <SingleContactSection />
+      <AddTagSection />
     </>
   );
 };

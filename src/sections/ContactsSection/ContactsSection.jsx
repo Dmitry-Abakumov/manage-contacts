@@ -1,10 +1,10 @@
-import { AddTagForm } from "@/components/base";
+import { ContactList } from "@/components/base";
 
-export const AddTag = () => {
+export const ContactsSection = () => {
   return (
     <section className="py-[22px]">
       <div className="container">
-        <AddTagForm />
+        <ContactList />
       </div>
     </section>
   );
