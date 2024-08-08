@@ -2,8 +2,6 @@ import { CreateContactForm } from "@/components/base";
 
 import data from "@/data/data.json";
 
-console.log(data);
-
 export const CreateContactSection = () => {
   const { createContactSectionTitle } = data;
 

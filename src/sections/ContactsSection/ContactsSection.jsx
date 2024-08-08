@@ -7,7 +7,7 @@ export const ContactsSection = () => {
   return (
     <section className="py-[22px] md:py-0 md:mt-[-387px]  md:flex md:justify-end">
       <div className="smOnly:container">
-        <h1 className="ml-[24px] text-[20px] font-[500]">
+        <h1 className="ml-[24px] text-[20px] font-[500] mb-[24px]">
           {contactsSectionTitle}
         </h1>
         <ContactList />
