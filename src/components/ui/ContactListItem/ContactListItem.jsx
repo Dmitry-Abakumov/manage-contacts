@@ -8,7 +8,7 @@ import { ReactComponent as CloseIcon } from "@/icons/close.svg";
 import "react-toastify/dist/ReactToastify.css";
 
 export const ContactListItem = ({ id, avatar_url, fields, tags }) => {
-  const [deleteContact, { isError }] = useDeleteContactMutation();
+  const [deleteContact] = useDeleteContactMutation();
 
   const email = fields.email?.[0].value;
   const firstName = fields["first name"]?.[0].value;
