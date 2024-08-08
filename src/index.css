@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  @apply font-poppins font-normal;
+}
+
 .spinner {
   @apply flex justify-center mt-[10px];
 }

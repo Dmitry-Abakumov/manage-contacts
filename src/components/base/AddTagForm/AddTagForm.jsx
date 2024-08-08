@@ -21,18 +21,16 @@ export const AddTagForm = () => {
   const { refetch: refetchContact, isLoading: isOneContactLoading } =
     useGetOneContactQuery(id);
   const [addTag, { isLoading: isAddTagLoading }] = useAddTagMutation();
-
   const navigate = useNavigate();
 
   const handleSubmit = async ({ tag }, { resetForm }) => {
     try {
       const currentContactData = await refetchContact();
 
-      const isContactDeleted =
-        currentContactData?.data?.resources?.length === 0;
-
       const currentContact = currentContactData?.data?.resources?.[0];
 
+      const isContactDeleted =
+        currentContactData?.data?.resources?.length === 0;
       const isTagExist =
         currentContact && currentContact?.tags?.some((el) => el.tag === tag);
 

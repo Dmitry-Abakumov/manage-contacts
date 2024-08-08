@@ -22,6 +22,10 @@ module.exports = {
     },
 
     extend: {
+      fontFamily: {
+        poppins: ["var(--poppins)"],
+      },
+
       colors: {
         lightGrayColor: "#AAAAAA",
         primaryBgColor: "#EDEDED",

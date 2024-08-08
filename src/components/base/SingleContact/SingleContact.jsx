@@ -6,12 +6,16 @@ import { Button } from "@/components/ui";
 
 import { useGetOneContactQuery } from "@/services";
 
+import jsonData from "@/data/data.json";
+
 import { ReactComponent as ArrowBack } from "@/icons/arrow-back.svg";
 
 export const SingleContact = () => {
   const { id } = useParams();
   const { data, isError, isLoading } = useGetOneContactQuery(id);
   const navigate = useNavigate();
+
+  const { singleContactTagsTitle } = jsonData;
 
   const isContactDeleted = data?.resources?.length === 0;
 
@@ -20,6 +24,8 @@ export const SingleContact = () => {
   }
 
   const contactData = data?.resources?.[0];
+
+  const areTags = contactData?.tags?.length > 0;
 
   const email = contactData?.fields?.email?.[0].value;
   const firstName = contactData?.fields["first name"]?.[0].value;
@@ -43,6 +49,7 @@ export const SingleContact = () => {
           wrapperClass="spinner"
         />
       )}
+
       {data && (
         <div className="md:flex flex-col md:items-center">
           <div className="md:flex md:items-center md:gap-[10px]">
@@ -74,6 +81,12 @@ export const SingleContact = () => {
               </div>
             </div>
           </div>
+
+          {areTags && (
+            <p className="text-[16px] font-[500] mt-[26px]">
+              {singleContactTagsTitle}
+            </p>
+          )}
 
           <ul className="flex items-center gap-[5px] flex-wrap mt-[10px]">
             {contactData?.tags?.map(({ id, tag }) => (

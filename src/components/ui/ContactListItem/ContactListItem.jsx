@@ -3,7 +3,7 @@ import { toast } from "react-toastify";
 
 import { useDeleteContactMutation } from "@/services";
 
-import { ReactComponent as CloseIcon } from "@/icons/close.svg";
+import { ReactComponent as DeleteIcon } from "@/icons/delete.svg";
 
 import "react-toastify/dist/ReactToastify.css";
 
@@ -14,6 +14,23 @@ export const ContactListItem = ({ id, avatar_url, fields, tags }) => {
   const firstName = fields["first name"]?.[0].value;
   const lastName = fields["last name"]?.[0].value;
 
+  const onDeleteButtonClick = async () => {
+    try {
+      await deleteContact(id);
+
+      toast.success("Tag has successfully deleted.", {
+        position: "top-right",
+      });
+    } catch {
+      toast.error(
+        "Ooops, something went wrong. Please, try to reload the page.",
+        {
+          position: "top-right",
+        }
+      );
+    }
+  };
+
   return (
     <li className="relative bg-primaryBgColor px-[8px] py-[10px] rounded-[5px]">
       <div className="flex items-center gap-[5px]">
@@ -23,11 +40,11 @@ export const ContactListItem = ({ id, avatar_url, fields, tags }) => {
 
         <div>
           <div className="flex items-center gap-[5px]">
-            <p>{firstName}</p>
-            <p>{lastName}</p>
+            <p className="text-[16px] font-[500]">{firstName}</p>
+            <p className="text-[16px] font-[500]">{lastName}</p>
           </div>
 
-          <p>{email}</p>
+          <p className="text-[16px] font-[500]">{email}</p>
         </div>
       </div>
 
@@ -37,7 +54,9 @@ export const ContactListItem = ({ id, avatar_url, fields, tags }) => {
             key={id}
             className="bg-secondaryBgColor px-[12px] py-[6px] rounded-[5px]"
           >
-            <p className="flex justify-center items-center">{tag}</p>
+            <p className="flex justify-center items-center text-[13px] font-[500]">
+              {tag}
+            </p>
           </li>
         ))}
       </ul>
@@ -47,24 +66,9 @@ export const ContactListItem = ({ id, avatar_url, fields, tags }) => {
       <button
         className="absolute top-[10px] right-[20px]"
         type="button"
-        onClick={async () => {
-          try {
-            await deleteContact(id);
-
-            toast.success("Tag has successfully deleted.", {
-              position: "top-right",
-            });
-          } catch {
-            toast.error(
-              "Ooops, something went wrong. Please, try to reload the page.",
-              {
-                position: "top-right",
-              }
-            );
-          }
-        }}
+        onClick={onDeleteButtonClick}
       >
-        <CloseIcon width="22" height="22" />
+        <DeleteIcon width="22" height="22" />
       </button>
     </li>
   );

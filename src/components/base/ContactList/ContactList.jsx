@@ -19,22 +19,25 @@ export const ContactList = () => {
     );
 
   return (
-    <ul className="flex flex-col gap-[14px] md:w-[300px] xl:w-[550px]">
-      {data &&
-        !isLoading &&
-        !isError &&
-        data.resources.map((contact) => (
-          <ContactListItem key={contact.id} {...contact} />
-        ))}
+    <>
+      <div className="md:w-[300px] xl:w-[550px]">
+        {isLoading && (
+          <TailSpin
+            height="30"
+            width="30"
+            color="#000000"
+            wrapperClass="spinner"
+          />
+        )}
+      </div>
 
-      {isLoading && (
-        <TailSpin
-          height="30"
-          width="30"
-          color="#000000"
-          wrapperClass="spinner"
-        />
+      {data && !isLoading && !isError && (
+        <ul className="flex flex-col gap-[14px] md:w-[300px] xl:w-[550px]">
+          {data.resources.map((contact) => (
+            <ContactListItem key={contact.id} {...contact} />
+          ))}
+        </ul>
       )}
-    </ul>
+    </>
   );
 };
