@@ -47,7 +47,7 @@ export const contactApi = createApi({
         method: "PUT",
         body,
       }),
-      invalidatesTags: ["OneContact"],
+      invalidatesTags: ["OneContact", "Contacts"],
     }),
   }),
 });

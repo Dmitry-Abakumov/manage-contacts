@@ -12,7 +12,7 @@ export const UserRoutes = () => {
         <TailSpin
           height="30"
           width="30"
-          color="#d3d3d3"
+          color="#d000000"
           wrapperClass="spinner"
         />
       }

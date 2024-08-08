@@ -1,15 +1,23 @@
-import { useParams, Navigate } from "react-router-dom";
+import { useParams, Navigate, useNavigate } from "react-router-dom";
 import { TailSpin } from "react-loader-spinner";
+import { toast } from "react-toastify";
+
+import { Button } from "@/components/ui";
 
 import { useGetOneContactQuery } from "@/services";
+
+import { ReactComponent as ArrowBack } from "@/icons/arrow-back.svg";
 
 export const SingleContact = () => {
   const { id } = useParams();
   const { data, isError, isLoading } = useGetOneContactQuery(id);
+  const navigate = useNavigate();
 
   const isContactDeleted = data?.resources?.length === 0;
 
-  if (isContactDeleted) return <Navigate to="/contacts" />;
+  if (isContactDeleted) {
+    return <Navigate to="/contacts" />;
+  }
 
   const contactData = data?.resources?.[0];
 
@@ -17,35 +25,53 @@ export const SingleContact = () => {
   const firstName = contactData?.fields["first name"]?.[0].value;
   const lastName = contactData?.fields["last name"]?.[0].value;
 
+  if (isError)
+    toast.error(
+      "Ooops, something went wrong. Please, try to reload the page.",
+      {
+        position: "top-right",
+      }
+    );
+
   return (
     <>
       {isLoading && (
         <TailSpin
           height="30"
           width="30"
-          color="#d3d3d3"
+          color="#000000"
           wrapperClass="spinner"
         />
       )}
       {data && (
-        <>
-          <div className="flex items-center gap-[5px]">
-            <div className="rounded-[5px] overflow-hidden">
-              <img
-                src={contactData?.avatar_url}
-                alt="avatar"
-                width="59"
-                height="59"
-              />
-            </div>
+        <div className="md:flex flex-col md:items-center">
+          <div className="md:flex md:items-center md:gap-[10px]">
+            <Button
+              onClick={() => navigate("/contacts")}
+              type="button"
+              className="w-auto mb-[10px] h-auto px-[10px] py-[5px] md:mb-0"
+            >
+              <ArrowBack width="20" height="20" />
+            </Button>
 
-            <div>
-              <div className="flex items-center gap-[5px]">
-                <p>{firstName}</p>
-                <p>{lastName}</p>
+            <div className="flex items-center gap-[5px]">
+              <div className="rounded-[5px] overflow-hidden">
+                <img
+                  src={contactData?.avatar_url}
+                  alt="avatar"
+                  width="59"
+                  height="59"
+                />
               </div>
 
-              <p>{email}</p>
+              <div>
+                <div className="flex items-center gap-[5px]">
+                  <p>{firstName}</p>
+                  <p>{lastName}</p>
+                </div>
+
+                <p>{email}</p>
+              </div>
             </div>
           </div>
 
@@ -59,7 +85,7 @@ export const SingleContact = () => {
               </li>
             ))}
           </ul>
-        </>
+        </div>
       )}
     </>
   );

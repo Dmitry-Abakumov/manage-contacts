@@ -1,14 +1,25 @@
 import { TailSpin } from "react-loader-spinner";
+import { toast } from "react-toastify";
 
 import { useGetAllContactsQuery } from "@/services";
 
 import { ContactListItem } from "@/components/ui";
 
+import "react-toastify/dist/ReactToastify.css";
+
 export const ContactList = () => {
   const { data, isLoading, isError } = useGetAllContactsQuery();
 
+  if (isError)
+    toast.error(
+      "Ooops, something went wrong. Please, try to reload the page.",
+      {
+        position: "top-right",
+      }
+    );
+
   return (
-    <ul className="flex flex-col gap-[14px]">
+    <ul className="flex flex-col gap-[14px] md:w-[300px] xl:w-[550px]">
       {data &&
         !isLoading &&
         !isError &&
@@ -20,12 +31,10 @@ export const ContactList = () => {
         <TailSpin
           height="30"
           width="30"
-          color="#d3d3d3"
+          color="#000000"
           wrapperClass="spinner"
         />
       )}
-
-      {/* {isError && <p>{error.message}</p>} */}
     </ul>
   );
 };

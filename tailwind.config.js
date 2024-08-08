@@ -26,6 +26,7 @@ module.exports = {
         lightGrayColor: "#AAAAAA",
         primaryBgColor: "#EDEDED",
         secondaryBgColor: "#A6A6A6",
+        errorColor: "red",
       },
     },
   },
