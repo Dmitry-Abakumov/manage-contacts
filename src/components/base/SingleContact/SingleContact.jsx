@@ -10,6 +10,8 @@ import jsonData from "@/data/data.json";
 
 import { ReactComponent as ArrowBack } from "@/icons/arrow-back.svg";
 
+import "react-toastify/dist/ReactToastify.css";
+
 export const SingleContact = () => {
   const { id } = useParams();
   const { data, isError, isLoading } = useGetOneContactQuery(id);
@@ -20,6 +22,10 @@ export const SingleContact = () => {
   const isContactDeleted = data?.resources?.length === 0;
 
   if (isContactDeleted) {
+    toast.error("Ooops, it seems this contact was deleted.", {
+      position: "top-right",
+    });
+
     return <Navigate to="/contacts" />;
   }
 
