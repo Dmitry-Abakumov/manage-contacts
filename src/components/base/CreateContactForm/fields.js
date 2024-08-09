@@ -4,20 +4,20 @@ export const fields = {
     type: "text",
     placeholder: "First name",
     label: "First name",
-    autocomplete: "name",
+    autoComplete: "name",
   },
   lastName: {
     name: "lastName",
     type: "text",
     placeholder: "Last name",
     label: "Last name",
-    autocomplete: "family-name",
+    autoComplete: "family-name",
   },
   email: {
     name: "email",
     type: "email",
     placeholder: "Email",
     label: "Email",
-    autocomplete: "email",
+    autoComplete: "email",
   },
 };

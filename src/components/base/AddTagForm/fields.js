@@ -4,6 +4,6 @@ export const fields = {
     type: "text",
     label: "Add new tag",
     placeholder: "Add new tag",
-    autocomplete: "off",
+    autoComplete: "off",
   },
 };
