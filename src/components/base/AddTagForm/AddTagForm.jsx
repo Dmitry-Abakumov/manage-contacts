@@ -32,7 +32,10 @@ export const AddTagForm = () => {
       const isContactDeleted =
         currentContactData?.data?.resources?.length === 0;
       const isTagExist =
-        currentContact && currentContact?.tags?.some((el) => el.tag === tag);
+        currentContact &&
+        currentContact?.tags?.some(
+          (el) => el?.tag.toUpperCase().trim() === tag.toUpperCase().trim()
+        );
 
       if (isContactDeleted) {
         navigate("/contacts");
@@ -54,10 +57,10 @@ export const AddTagForm = () => {
         return;
       }
 
-      const currentTags = currentContact?.tags.map(({ tag }) => tag);
+      const currentTags = currentContact?.tags?.map(({ tag }) => tag.trim());
 
       const body = {
-        tags: [...currentTags, tag],
+        tags: [...currentTags, tag.trim()],
       };
 
       await addTag({ id, body }).unwrap();

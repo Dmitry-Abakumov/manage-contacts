@@ -1,5 +1,9 @@
 import { object, string } from "yup";
 
+const noOnlySpacesRegex = /^(?!\s*$).+/;
+
 export const validationSchema = object({
-  tag: string().required("Enter a tag"),
+  tag: string()
+    .matches(noOnlySpacesRegex, "This field cannot contain only spaces.")
+    .required("Enter a tag"),
 });
